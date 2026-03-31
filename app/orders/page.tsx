@@ -6,7 +6,7 @@ import { Header } from '@/components/header'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/hooks/use-auth'
-import { formatPrice, formatDateTime } from '@/lib/utils')
+import { formatPrice, formatDateTime } from '@/lib/utils'
 
 interface Order {
   id: string

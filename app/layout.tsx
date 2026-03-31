@@ -6,8 +6,8 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Shopora - Modern E-Commerce Platform",
-  description: "A full-stack e-commerce platform built with Next.js, Stripe, PostgreSQL, and Redis",
+  title: "SHOPMAX - The Future of E-Commerce",
+  description: "AI-powered shopping experience with next-generation e-commerce technology",
 }
 
 export default function RootLayout({

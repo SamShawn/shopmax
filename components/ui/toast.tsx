@@ -125,26 +125,3 @@ export {
   ToastClose,
   ToastAction,
 }
-
-export const Toast = ({
-  title,
-  description,
-  variant = "default",
-  ...props
-}: {
-  title: string
-  description?: string
-  variant?: VariantProps<typeof toastVariants>["variant"]
-}) => {
-  return (
-    <ToastPrimitive.Root
-      className={cn(toastVariants({ variant }))}
-      {...props}
-    >
-      <div className="grid gap-1">
-        {title && <ToastTitle>{title}</ToastTitle>}
-        {description && <ToastDescription>{description}</ToastDescription>}
-      </div>
-    </ToastPrimitive.Root>
-  )
-}
