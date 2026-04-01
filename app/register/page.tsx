@@ -33,7 +33,7 @@ export default function RegisterPage() {
       if (response.ok) {
         toast({
           title: 'Account created!',
-          description: 'Welcome to Shopora',
+          description: 'Welcome to Shopmax',
         })
         router.push('/')
       } else {

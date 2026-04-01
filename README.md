@@ -1,4 +1,4 @@
-# Shopora - Modern E-Commerce Platform
+# Shopmax - Modern E-Commerce Platform
 
 A full-stack e-commerce platform built with Next.js, Stripe, PostgreSQL, and Redis.
 
@@ -200,7 +200,7 @@ Access at `/admin` when logged in. Features:
 
 ```env
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/shopora"
+DATABASE_URL="postgresql://user:password@localhost:5432/shopmax"
 
 # Redis
 REDIS_URL="redis://localhost:6379"

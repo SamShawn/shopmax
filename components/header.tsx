@@ -23,7 +23,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-2">
           <Package className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold">Shopora</span>
+          <span className="text-xl font-bold">Shopmax</span>
         </Link>
 
         <nav className="flex items-center space-x-4">

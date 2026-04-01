@@ -1,8 +1,8 @@
-# Shopora Architecture Design
+# Shopmax Architecture Design
 
 ## 1. System Overview
 
-Shopora is a modern full-stack e-commerce platform using:
+Shopmax is a modern full-stack e-commerce platform using:
 - **Next.js 14** with App Router for frontend and API
 - **PostgreSQL** for persistent data storage
 - **Redis** for caching and session management

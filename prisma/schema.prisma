@@ -21,6 +21,7 @@ model User {
   orders        Order[]
   addresses     Address[]
   reviews       Review[]
+  cartItems     CartItem[]
 
   @@index([email])
 }
