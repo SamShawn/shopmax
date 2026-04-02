@@ -9,37 +9,37 @@
 ## 🔴 高优先级 (P0)
 
 ### 1. 购物车页面
-- [ ] 创建 `/cart` 页面
-- [ ] 显示购物车商品列表
-- [ ] 支持修改商品数量
-- [ ] 支持删除商品
-- [ ] 显示订单金额汇总
-- [ ] 空购物车状态处理
-- [ ] API: `GET/POST/PUT/DELETE /api/cart` 已实现，需完善前端
+- [x] 创建 `/cart` 页面
+- [x] 显示购物车商品列表
+- [x] 支持修改商品数量
+- [x] 支持删除商品
+- [x] 显示订单金额汇总
+- [x] 空购物车状态处理
+- [x] API: `GET/POST/PUT/DELETE /api/cart` 已实现
 
 ### 2. 产品搜索功能
-- [ ] 创建搜索 API (`/api/products/search`)
+- [x] 创建搜索 API (`/api/products/search`)
 - [ ] 添加搜索输入框到 Header
-- [ ] 创建 `/search` 页面
-- [ ] 实现按名称、描述搜索
-- [ ] 实现价格范围筛选
-- [ ] 实现排序功能（价格、创建时间）
+- [x] 创建 `/search` 页面
+- [x] 实现按名称、描述搜索
+- [x] 实现价格范围筛选
+- [x] 实现排序功能（价格、创建时间）
 
 ### 3. 产品评价展示
-- [ ] 在产品详情页添加评价区域
-- [ ] 显示平均评分和评价数量
-- [ ] 列出用户评价列表
-- [ ] 创建评价 API (`POST /api/products/[id]/reviews`)
+- [x] 在产品详情页添加评价区域
+- [x] 显示平均评分和评价数量
+- [x] 列出用户评价列表
+- [x] 创建评价 API (`POST /api/products/[id]/reviews`)
 - [ ] 仅已购买用户可评价
 
 ### 4. 地址管理
-- [ ] 创建地址管理 API
-  - [ ] `GET /api/addresses` - 获取用户地址
-  - [ ] `POST /api/addresses` - 添加地址
-  - [ ] `PUT /api/addresses/[id]` - 更新地址
-  - [ ] `DELETE /api/addresses/[id]` - 删除地址
-  - [ ] `PUT /api/addresses/[id]/default` - 设为默认
-- [ ] 创建地址管理页面 `/account/addresses`
+- [x] 创建地址管理 API
+  - [x] `GET /api/addresses` - 获取用户地址
+  - [x] `POST /api/addresses` - 添加地址
+  - [x] `PUT /api/addresses/[id]` - 更新地址
+  - [x] `DELETE /api/addresses/[id]` - 删除地址
+  - [x] `PUT /api/addresses/[id]/default` - 设为默认
+- [x] 创建地址管理页面 `/account/addresses`
 - [ ] 结算页选择收货地址
 
 ---
@@ -79,10 +79,10 @@
 - [ ] 管理员创建/管理优惠券
 
 ### 9. 错误处理优化
-- [ ] 创建 `/404` 页面
-- [ ] 创建 `/500` 页面
+- [x] 创建 `/404` 页面 (Next.js 默认)
+- [x] 创建 `/500` 页面 (Next.js 默认)
 - [ ] 全局错误边界 (Error Boundary)
-- [ ] API 错误响应统一格式
+- [x] API 错误响应统一格式
 
 ---
 
@@ -182,4 +182,4 @@
 
 ---
 
-*最后更新: 2026-04-01*
+*最后更新: 2026-04-02*
