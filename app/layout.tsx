@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "SHOPMAX - The Future of E-Commerce",
   description: "AI-powered shopping experience with next-generation e-commerce technology",
+  icons: {
+    icon: [{ url: '/favicon.svg' }],
+  },
 }
 
 export default function RootLayout({
