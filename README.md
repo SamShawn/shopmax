@@ -1,28 +1,34 @@
 # Shopmax - Modern E-Commerce Platform
 
-A full-stack e-commerce platform built with Next.js, Stripe, PostgreSQL, and Redis.
+A full-stack e-commerce platform built with Next.js 14, React 18, Stripe, PostgreSQL, and Redis.
 
 ## Features
 
-- 🛒 Shopping cart with guest and user support
-- 💳 Stripe payment integration
-- 📦 Product management with admin dashboard
-- 📋 Order tracking and management
-- 🎨 Modern UI with Tailwind CSS
-- 🔐 JWT-based authentication
-- ⚡ Redis caching for performance
-- 💾 PostgreSQL with Prisma ORM
+- **Shopping Cart**: Guest and logged-in user support with Redis/PostgreSQL storage
+- **Product Search**: Full-text search across product catalog
+- **Product Reviews**: Ratings and reviews system for products
+- **Address Management**: Save and manage multiple shipping addresses
+- **Checkout**: Stripe payment integration
+- **Order Tracking**: View and track order status
+- **Admin Dashboard**: Product management (CRUD operations)
+- **Modern UI**: Tailwind CSS with Radix UI components
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14 (App Router), React, Tailwind CSS
-- **Backend**: Next.js API Routes
-- **Database**: PostgreSQL with Prisma ORM
-- **Cache**: Redis
-- **Payments**: Stripe
-- **Authentication**: JWT
+| Category | Technology |
+|----------|------------|
+| Framework | Next.js 14.2.13 (App Router) |
+| UI Library | React 18.3.1 |
+| Styling | Tailwind CSS 3.4.13 |
+| Components | Radix UI |
+| Database | PostgreSQL with Prisma 5.19.0 |
+| Cache | Redis with ioredis |
+| Payments | Stripe 16.12.0 |
+| Authentication | JWT with bcryptjs |
+| Testing | Vitest 4.1.2 + Playwright 1.59.1 |
+| Validation | Zod 3.23.8 |
 
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
@@ -33,168 +39,211 @@ A full-stack e-commerce platform built with Next.js, Stripe, PostgreSQL, and Red
 
 ### Installation
 
-1. Clone the repository and install dependencies:
-
 ```bash
+# Install dependencies
 npm install
-```
 
-2. Set up environment variables:
-
-```bash
+# Copy environment file
 cp .env.example .env
-```
 
-Edit `.env` and fill in your credentials:
-- `DATABASE_URL`: Your PostgreSQL connection string
-- `REDIS_URL`: Your Redis connection string
-- `STRIPE_SECRET_KEY`: Your Stripe secret key
-- `STRIPE_PUBLISHABLE_KEY`: Your Stripe publishable key
-- `STRIPE_WEBHOOK_SECRET`: Your Stripe webhook secret
-- `JWT_SECRET`: A random secret string for JWT
+# Configure environment variables
+# See Environment Variables section below
 
-3. Set up the database:
-
-```bash
+# Generate Prisma client and push schema
 npx prisma generate
 npx prisma db push
+
+# Seed database with sample data
 npm run db:seed
-```
 
-4. Start the development server:
-
-```bash
+# Start development server
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
 ```
-app/
-├── api/              # API routes
-│   ├── auth/         # Authentication endpoints
-│   ├── cart/         # Shopping cart endpoints
-│   ├── checkout/     # Checkout & payment endpoints
-│   ├── orders/       # Order management endpoints
-│   └── products/     # Product management endpoints
-├── admin/            # Admin dashboard
-├── checkout/         # Checkout flow pages
-├── products/         # Product pages
-└── category/         # Category pages
-
-components/
-├── ui/              # Reusable UI components
-├── header.tsx        # Navigation header
-├── product-card.tsx  # Product card component
-└── ...
-
-hooks/               # Custom React hooks
-├── use-cart.ts      # Shopping cart hook
-└── use-auth.ts      # Authentication hook
-
-lib/                 # Utility libraries
-├── prisma.ts        # Prisma client
-├── redis.ts         # Redis client & cache utilities
-├── stripe.ts        # Stripe client
-├── auth.ts          # Authentication utilities
-└── utils.ts         # General utilities
-
-prisma/
-├── schema.prisma     # Database schema
-└── seed.ts          # Seed data script
+shopmax/
+├── app/                      # Next.js App Router pages
+│   ├── api/                  # API routes
+│   │   ├── addresses/        # Address management API
+│   │   ├── auth/             # Authentication endpoints
+│   │   ├── cart/             # Shopping cart API
+│   │   ├── checkout/         # Stripe checkout & webhook
+│   │   ├── orders/           # Order management API
+│   │   └── products/         # Products API
+│   │       ├── search/       # Product search
+│   │       └── [id]/
+│   │           └── reviews/  # Product reviews
+│   ├── admin/                # Admin dashboard
+│   ├── cart/                 # Cart page
+│   ├── category/[name]/      # Category pages
+│   ├── checkout/             # Checkout flow
+│   ├── products/[id]/        # Product detail page
+│   ├── register/             # Registration page
+│   └── search/               # Search page
+│
+├── components/               # React components
+│   ├── ui/                   # Radix UI based components
+│   ├── address-form.tsx      # Address form
+│   ├── address-list.tsx      # Address list
+│   ├── cart-item.tsx         # Cart item
+│   ├── cart-summary.tsx      # Cart totals
+│   ├── header.tsx            # Navigation header
+│   ├── product-card.tsx      # Product card
+│   ├── product-reviews.tsx   # Product reviews
+│   ├── review-form.tsx       # Review submission form
+│   └── reviews.tsx           # Reviews list
+│
+├── hooks/                    # Custom React hooks
+│   └── use-cart.ts           # Cart management
+│   └── use-auth.ts           # Authentication
+│
+├── lib/                      # Utility libraries
+│   ├── auth.ts               # JWT & bcrypt utilities
+│   ├── prisma.ts             # Prisma client
+│   ├── redis.ts              # Redis client & caching
+│   ├── stripe.ts             # Stripe client
+│   └── utils.ts              # General utilities
+│
+├── prisma/
+│   ├── schema.prisma         # Database schema
+│   └── seed.ts               # Seed data script
+│
+└── __tests__/                # Test files
+    └── ...
 ```
 
 ## Database Schema
 
-### User
-- Basic user information and authentication
-- Related to orders, addresses, and reviews
+### Core Models
 
-### Product
-- Product details, pricing, and inventory
-- Related to cart items, orders, and reviews
+- **User**: Authentication, profile, Stripe customer ID
+- **Product**: Name, description, price, stock, category, image
+- **CartItem**: Shopping cart items (logged-in users)
+- **Order**: Order status, total, payment info, addresses
+- **OrderItem**: Snapshot of product at order time
+- **Address**: User shipping addresses with default flag
+- **Review**: Product ratings and reviews
 
-### CartItem
-- Shopping cart items for logged-in users
-- Guest carts are stored in Redis
+### Key Design Decisions
 
-### Order
-- Order information and status
-- Related to order items and user
-
-### OrderItem
-- Individual items in an order
-- Stores product snapshot at order time
-
-### Address
-- User shipping addresses
-
-### Review
-- Product reviews and ratings
+- **Order Snapshot**: Stores product price, name, image at order time
+- **Soft Delete**: Products use `isActive` flag for data integrity
+- **Decimal Precision**: Prices use `Decimal` type for financial accuracy
+- **Dual Cart Storage**: Guest carts in Redis, user carts in PostgreSQL
 
 ## Redis Usage
 
-### Caching Strategy
+### Cache Keys
 
-1. **Product Cache**: Individual product details (TTL: 1 hour)
-2. **Product List Cache**: Product listings by category (TTL: 10 minutes)
-3. **Guest Cart**: Shopping carts for non-logged-in users (TTL: 24 hours)
-4. **Rate Limiting**: API request rate limiting
+| Key Pattern | Data | TTL |
+|-------------|------|-----|
+| `product:{id}` | Product details | 1 hour |
+| `product:list:{category}` | Product list | 10 minutes |
+| `cart:{cartId}` | Guest cart | 24 hours |
+| `session:{token}` | User session | 7 days |
 
-### Cache Invalidation
+### Use Cases
 
-- Product updates invalidate product and list caches
-- Successful checkout clears guest cart
+1. **Product Caching**: Reduce database load for frequently accessed products
+2. **Guest Cart**: Store cart for anonymous users
+3. **Session Management**: JWT token blacklisting
+4. **API Rate Limiting**: Prevent abuse
 
 ## Stripe Integration
 
 ### Payment Flow
 
-1. User creates checkout session with cart items
-2. Server creates Stripe Checkout Session with metadata
-3. User completes payment on Stripe-hosted page
-4. Stripe webhook confirms payment
-5. Webhook creates order and updates inventory
+1. User adds items to cart
+2. Client requests checkout session from `/api/checkout/create-session`
+3. Server creates Stripe Checkout Session
+4. User completes payment on Stripe-hosted page
+5. Stripe webhook at `/api/checkout/webhook` confirms payment
+6. Order created, inventory updated, cart cleared
 
-### Webhook Events Handled
+### Webhook Events
 
-- `checkout.session.completed`: Order creation
+- `checkout.session.completed`: Create order, update stock
 - `payment_intent.succeeded`: Payment confirmation
-- `payment_intent.failed`: Payment failure handling
+- `payment_intent.payment_failed`: Handle failed payments
 
-## Order Status Flow
+## API Endpoints
 
+### Authentication
 ```
-PENDING → PROCESSING → SHIPPED → DELIVERED
-         ↓
-      CANCELLED
+POST   /api/auth/register     Create new account
+POST   /api/auth/login        Login user
+POST   /api/auth/logout       Logout user
+GET    /api/auth/me           Get current user
 ```
 
-## Shopping Cart Logic
+### Products
+```
+GET    /api/products              List all products
+GET    /api/products/[id]         Get product details
+POST   /api/products              Create product (admin)
+PUT    /api/products/[id]         Update product (admin)
+DELETE /api/products/[id]         Delete product (admin)
+GET    /api/products/search       Search products
+GET    /api/products/[id]/reviews Get product reviews
+POST   /api/products/[id]/reviews Add review
+```
 
-### Guest Users
+### Cart
+```
+GET    /api/cart              Get cart items
+POST   /api/cart              Add item to cart
+PUT    /api/cart              Update item quantity
+DELETE /api/cart              Clear cart
+DELETE /api/cart?productId=X  Remove specific item
+```
 
-- Cart stored in Redis with unique cart ID
-- Cart ID stored in HTTP-only cookie
-- Migrated to user cart on login
+### Addresses
+```
+GET    /api/addresses              List user addresses
+POST   /api/addresses              Create address
+PUT    /api/addresses/[id]         Update address
+DELETE /api/addresses/[id]         Delete address
+PUT    /api/addresses/[id]/default Set default address
+```
 
-### Logged-in Users
+### Orders
+```
+GET    /api/orders           List user orders
+GET    /api/orders/[id]      Get order details
+```
 
-- Cart stored in PostgreSQL
-- Associated with user ID
-- Persistent across sessions
+### Checkout
+```
+POST   /api/checkout/create-session  Create Stripe session
+POST   /api/checkout/webhook         Stripe webhook handler
+```
 
-## Admin Dashboard
+## Development Commands
 
-Access at `/admin` when logged in. Features:
+```bash
+# Development
+npm run dev              # Start dev server
+npm run build            # Production build
+npm start                # Start production server
 
-- View all products
-- Add new products
-- Edit existing products
-- Delete products (soft delete)
-- Search and filter products
+# Database
+npx prisma generate      # Generate Prisma client
+npx prisma db push       # Push schema to database
+npm run db:seed          # Seed database
+npm run db:studio        # Open Prisma Studio
+
+# Testing
+npm run test             # Run unit tests (watch mode)
+npm run test:run         # Run unit tests once
+npm run test:coverage    # Run with coverage
+npm run test:ui          # Open Vitest UI
+npm run test:e2e         # Run E2E tests
+npm run test:e2e:ui      # Open Playwright UI
+```
 
 ## Environment Variables
 
@@ -210,44 +259,33 @@ STRIPE_SECRET_KEY="sk_test_xxx"
 STRIPE_PUBLISHABLE_KEY="pk_test_xxx"
 STRIPE_WEBHOOK_SECRET="whsec_xxx"
 
-# JWT
+# Authentication
 JWT_SECRET="your-secret-key"
 JWT_EXPIRES_IN="7d"
 
-# App
+# Application
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
-```
-
-## Development
-
-```bash
-# Run development server
-npm run dev
-
-# Generate Prisma client
-npx prisma generate
-
-# Push database schema
-npx prisma db push
-
-# Seed database
-npm run db:seed
-
-# Open Prisma Studio (database GUI)
-npm run db:studio
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
 ```
 
 ## Default Credentials
 
-After running the seed script, you can login with:
-- Email: `demo@example.com`
-- Password: `password123`
+After running the seed script:
+
+- **Email**: `demo@example.com`
+- **Password**: `password123`
+
+## Testing
+
+### Unit Tests (Vitest)
+- Located in `__tests__/`
+- Component testing with React Testing Library
+- Mocked MSW for API mocking
+- Coverage reporting with v8
+
+### E2E Tests (Playwright)
+- Located in `e2e/`
+- Full browser testing
+- Located in `test-results/` and `playwright-report/`
 
 ## License
 
