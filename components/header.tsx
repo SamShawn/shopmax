@@ -3,13 +3,6 @@
 import Link from 'next/link'
 import { ShoppingCart, User, Package, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { useCart } from '@/hooks/use-cart'
 import { useAuth } from '@/hooks/use-auth'
 
@@ -35,53 +28,16 @@ export function Header() {
               <Link href="/orders" className="text-sm font-medium hover:text-primary">
                 Orders
               </Link>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="ghost" size="icon" className="relative">
-                    <ShoppingCart className="h-5 w-5" />
-                    {cartCount > 0 && (
-                      <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
-                        {cartCount}
-                      </span>
-                    )}
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Shopping Cart</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4">
-                    {cartItems.length === 0 ? (
-                      <p className="text-center text-muted-foreground">Your cart is empty</p>
-                    ) : (
-                      <>
-                        {cartItems.map((item) => (
-                          <div key={item.id} className="flex items-center justify-between">
-                            <div>
-                              <p className="font-medium">{item.name}</p>
-                              <p className="text-sm text-muted-foreground">
-                                Qty: {item.quantity} × ${Number(item.price).toFixed(2)}
-                              </p>
-                            </div>
-                            <p className="font-medium">
-                              ${(Number(item.price) * item.quantity).toFixed(2)}
-                            </p>
-                          </div>
-                        ))}
-                        <div className="border-t pt-4">
-                          <div className="flex justify-between font-bold">
-                            <span>Total</span>
-                            <span>${cartTotal.toFixed(2)}</span>
-                          </div>
-                          <Link href="/checkout" className="block mt-4">
-                            <Button className="w-full">Proceed to Checkout</Button>
-                          </Link>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <Link href="/cart" className="relative">
+                <Button variant="ghost" size="icon">
+                  <ShoppingCart className="h-5 w-5" />
+                </Button>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
 
               <div className="flex items-center space-x-2">
                 <User className="h-5 w-5" />

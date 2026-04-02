@@ -48,8 +48,18 @@ export async function GET(
         : null
 
     const result = {
-      ...product,
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: Number(product.price),
+      stock: product.stock,
+      imageUrl: product.imageUrl,
+      category: product.category,
+      isActive: product.isActive,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
       avgRating,
+      reviewsCount: product.reviews.length,
     }
 
     // 缓存结果
