@@ -1,13 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Header } from '@/components/header'
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-32">
         <div className="absolute inset-0 overflow-hidden">

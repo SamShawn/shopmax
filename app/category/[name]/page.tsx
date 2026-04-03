@@ -1,5 +1,4 @@
 import { ProductCard } from '@/components/product-card'
-import { Header } from '@/components/header'
 import { prisma } from '@/lib/prisma'
 
 interface CategoryPageProps {
@@ -26,7 +25,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="min-h-screen">
-      <Header />
       <main className="container mx-auto px-4 py-8">
         <h1 className="mb-6 text-3xl font-bold">{categoryName}</h1>
 

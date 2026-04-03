@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Header } from '@/components/header'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -43,7 +42,6 @@ export default function CheckoutPage() {
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen">
-        <Header />
         <main className="container mx-auto px-4 py-8">
           <Card className="mx-auto max-w-md text-center">
             <CardHeader>
@@ -94,7 +92,6 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="grid gap-8 lg:grid-cols-2">
           <div>
