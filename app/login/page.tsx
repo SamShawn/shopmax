@@ -28,6 +28,7 @@ export default function LoginPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       })
 
       const data = await response.json()
@@ -37,6 +38,10 @@ export default function LoginPage() {
           title: 'Welcome back!',
           description: 'You have successfully logged in',
         })
+        // 触发客户端状态刷新
+        window.dispatchEvent(new CustomEvent('auth-refresh'))
+        // 使用 Next.js 的 refresh 刷新服务端数据
+        router.refresh()
         router.push('/')
       } else {
         toast({

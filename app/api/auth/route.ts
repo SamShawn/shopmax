@@ -9,9 +9,12 @@ import bcrypt from 'bcryptjs'
  */
 export async function GET() {
   try {
+    console.log('[auth/me] GET called')
     const user = await getCurrentUser()
+    console.log('[auth/me] user from token:', user)
 
     if (!user) {
+      console.log('[auth/me] no user found, returning null')
       return NextResponse.json({ user: null })
     }
 
